@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Recipe extends Model
 {
     use HasFactory;
+
+    function tags() {
+        return $this->belongsToMany(Tag::class);
+    }
 }
