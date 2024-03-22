@@ -17,3 +17,5 @@ Este código no afecte a los clientes anteriores
 400 - no encontrado
 500 - falló el servidor
 
+
+php artisan make:migration create_recipe_tag_table
