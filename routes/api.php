@@ -3,6 +3,7 @@
 use App\Http\Controllers\Api\CategoryController;
 use App\Http\Controllers\Api\RecipeController;
 use App\Http\Controllers\Api\TagController;
+use App\Jobs\Logger;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -33,3 +34,8 @@ Route::delete('recipes/{recipe}', [RecipeController::class, 'destroy']); */
 
 Route::get('tags', [TagController::class, 'index']);
 Route::get('tags/{tag}', [TagController::class, 'show']);
+
+Route::get('logger', function () {
+    Logger::dispatchAfterResponse();
+    return response("<br>Fin");
+});
