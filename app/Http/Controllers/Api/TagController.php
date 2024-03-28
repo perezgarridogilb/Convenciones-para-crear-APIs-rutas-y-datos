@@ -11,14 +11,16 @@ use Illuminate\Http\Request;
 class TagController extends Controller
 {
     public function index() {
-        // Para la misma configuracion
-        return TagResource::collection(Tag::with('recipes')->get());
+        $tags = Tag::with('recipes.category', 'recipes.tags', 'recipes.user')->get();
+        // Para la misma configuracion usa collection
+        return TagResource::collection($tags);
         /* return Tag::with('recipes')->get(); */
     }
 
     public function show(Tag $tag) {
         /* return Tag */
         /* return $tag->load('recipes'); */
-        return new TagResource($tag->load('recipes'));
+        $tag = $tag->load('recipes.category', 'recipes.tags', 'recipes.user');
+        return new TagResource($tag);
     }
 }

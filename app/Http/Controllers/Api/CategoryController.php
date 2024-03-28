@@ -31,7 +31,7 @@ class CategoryController extends Controller
         /**
          * Carga a todas las recetas que tienes relacionadas
          */
-        $category = $category->load('recipes');
+        $category = $category->load('recipes.category', 'recipes.tags', 'recipes.user');
         return new CategoryResource($category);
     }
 }
