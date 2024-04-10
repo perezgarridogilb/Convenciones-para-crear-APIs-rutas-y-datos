@@ -13,6 +13,22 @@ class Recipe extends Model
      * Perteneces y tienes muchas
      * Esto es para trabajar con muchos a muchos
      */
+
+     /**
+      * Esta configuración es para la asignación masiva de
+      * datos
+      * @var array
+      */
+     protected $fillable = [
+        'category_id',
+        'user_id',
+        'title',
+        'description',
+        'ingredients',
+        'instructions',
+        'image',
+     ];
+
     public function tags()
     {
         return $this->belongsToMany(Tag::class);
