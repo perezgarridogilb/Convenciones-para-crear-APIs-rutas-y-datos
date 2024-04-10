@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreRecipeRequest;
+use App\Http\Requests\UpdateRecipeRequest;
 use App\Http\Resources\RecipeResource;
 use App\Models\Recipe;
 use Illuminate\Http\Request;
@@ -18,17 +20,24 @@ class RecipeController extends Controller
         return RecipeResource::collection($recipes);
     }
 
-    public function store(Request $request) {
+    public function store(StoreRecipeRequest $request) {
+/*         $request->validate([
+            'category_id' => 'required',
+            'user_id' => 'required',
+            'title' => 'required',
+            'description' => 'required',
+            'ingredients' => 'required'
+        ]); */
         $recipe = Recipe::create($request->all());
 
         /** recibimos en string para convertir en un array */
-        if ($tags = json_decode($request->tags)) {
+        // if ($tags = json_decode($request->tags)) {
             /** asignamos esas etiquetas a la receta que estamos manejando
              * en ese momento
              */
-            $recipe->tags()->attach($tags);
+            $recipe->tags()->attach($request->tags);
             # code...
-        }
+        // }
 
         return response()->json(new RecipeResource($recipe), Response::HTTP_CREATED); // 201
     }
@@ -38,7 +47,7 @@ class RecipeController extends Controller
         return new RecipeResource($recipe);
     }
 
-    public function update(Request $request, Recipe $recipe) {
+    public function update(UpdateRecipeRequest $request, Recipe $recipe) {
         $recipe->update($request->all());
 
         if ($tags = json_decode($request->tags)) {
