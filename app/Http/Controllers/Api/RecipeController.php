@@ -28,14 +28,20 @@ class RecipeController extends Controller
             'description' => 'required',
             'ingredients' => 'required'
         ]); */
-        $recipe = Recipe::create($request->all());
+
+        /* $recipe = Recipe::create($request->all()); */
+        /** 
+         * El user_id se asigna automáticamente
+         */
+        $recipe = $request->user()->recipes()->create($request->all());
+        /* $recipe->tags()->attach($tags); */ 
 
         /** recibimos en string para convertir en un array */
         // if ($tags = json_decode($request->tags)) {
             /** asignamos esas etiquetas a la receta que estamos manejando
              * en ese momento
              */
-            $recipe->tags()->attach($request->tags);
+            $recipe->tags()->attach(json_decode($request->tags));
             # code...
         // }
 
