@@ -19,3 +19,14 @@ Este código no afecte a los clientes anteriores
 
 
 php artisan make:migration create_recipe_tag_table
+
+```
+# Abstraer el request
+php artisan make:request UpdateRecipeRequest
+
+# Abstraer las poiciticas de acceso
+php artisan make:policy RecipePolicy
+
+
+
+```
