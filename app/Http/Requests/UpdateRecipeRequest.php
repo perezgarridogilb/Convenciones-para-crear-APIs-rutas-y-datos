@@ -11,22 +11,21 @@ class UpdateRecipeRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
      * Get the validation rules that apply to the request.
      *
-     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
+     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array|string>
      */
     public function rules(): array
     {
         return [
-            'category_id' => 'required',
-            'user_id' => 'required',
-            'title' => 'required',
-            'description' => 'required',
-            'ingredients' => 'required',
+            'category_id'  => 'required',
+            'title'        => 'required',
+            'description'  => 'required',
+            'ingredients'  => 'required',
             'instructions' => 'required',
         ];
     }
