@@ -41,7 +41,10 @@ class RecipeController extends Controller
             /** asignamos esas etiquetas a la receta que estamos manejando
              * en ese momento
              */
+            
             $recipe->tags()->attach(json_decode($request->tags));
+            $recipe->image = $request->file('image')->store('recipes', 'public');
+            $recipe->save();
             # code...
         // }
 
@@ -61,6 +64,11 @@ class RecipeController extends Controller
             /** elimina lo que existe y crea eso que estamos asignando */
             $recipe->tags()->sync($tags);
             # code...
+        }
+
+        if ($request->file('image')) {
+            $recipe->image = $request->file('image')->store('recipes', 'public');
+            $recipe->save();
         }
 
         return response()->json(new RecipeResource($recipe), Response::HTTP_OK); // 200
