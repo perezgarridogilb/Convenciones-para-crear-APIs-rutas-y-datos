@@ -63,7 +63,6 @@ class RecipeController extends Controller
         if ($tags = json_decode($request->tags)) {
             /** elimina lo que existe y crea eso que estamos asignando */
             $recipe->tags()->sync($tags);
-            # code...
         }
 
         if ($request->file('image')) {
